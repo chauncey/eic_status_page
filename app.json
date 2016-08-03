@@ -1,0 +1,15 @@
+{
+  "name": "eic-status-page",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
