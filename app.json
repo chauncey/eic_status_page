@@ -1,8 +1,11 @@
 {
-  "name": "eic-status-page",
+  "name": "eic-status-api",
   "scripts": {
   },
   "env": {
+    "AGENTS_URL": "www.google.com",
+    "DEBUG": "False",
+    "INS_URL": "www.bing.com"
   },
   "formation": {
   },
