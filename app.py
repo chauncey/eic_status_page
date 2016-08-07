@@ -8,7 +8,6 @@ from urllib.error import HTTPError, URLError
 from flask import Flask, Response, json, jsonify, request
 app = Flask(__name__)
 app.debug = os.environ.get('DEBUG')
-print(repr(os.environ))
 
 mock_data = [
     {
@@ -21,7 +20,6 @@ context = ssl._create_unverified_context()
 
 def check_agents():
     url = 'https://{}'.format(os.environ.get('AGENTS_URL'))
-    print(url)
     try:
         urllib.request.urlopen(url, context=context)
         return {'status': 'up'}
