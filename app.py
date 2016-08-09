@@ -6,8 +6,10 @@ import ssl
 import urllib.request
 from urllib.error import HTTPError, URLError
 from flask import Flask, Response, json, jsonify, request
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 app.debug = os.environ.get('DEBUG')
+CORS(app)
 
 mock_data = [
     {
@@ -36,14 +38,6 @@ def check_agents():
             'status': 'down',
             'error': 'Error {}'.format(e)
         }
-
-
-def jsonp(data, callback="function"):
-    '''Provide a JSONP response with callback'''
-    return Response(
-        "%s(%s);" %(callback, json.dumps(data)),
-        mimetype="text/javascript"
-    )
 
 
 @app.route('/')
@@ -76,13 +70,11 @@ def echo():
 @app.route('/eic-status/api/v1.0/<area>', methods=['GET'])
 def get_status(area='all'):
     '''Return status of an area or all areas'''
-    callback = request.args.get('callback')
     if area in ['all', 'agents']:
         resp = {'agents': check_agents()}
-    if callback:
-        return jsonp(resp, callback)
+        return jsonify(resp)
     else:
-        return jsonp(mock_data)
+        return jsonify(mock_data)
 
 
 if __name__ == '__main__':
